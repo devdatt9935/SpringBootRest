@@ -13,11 +13,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserDto {
     private Long id;
-    @NotEmpty
+    @NotEmpty(message = "firstName should not be empty")
     private String firstName;
-    @NotEmpty
+    @NotEmpty(message = "lastName should not be empty")
     private String lastName;
-    @NotEmpty
+    @NotEmpty(message = "email should not be empty")
     @Email
     private String email;
 }
