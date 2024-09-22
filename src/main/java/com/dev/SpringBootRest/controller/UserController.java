@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import com.dev.SpringBootRest.service.UserService;
 import com.dev.dto.UserDto;
+
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +24,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class UserController {
     private UserService userService;
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
+    public ResponseEntity<UserDto> createUser(@RequestBody @Valid UserDto userDto){
         UserDto savedUser = userService.createUser(userDto);
         return new ResponseEntity<>(savedUser,HttpStatus.CREATED);
     }
@@ -40,7 +42,7 @@ public class UserController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<UserDto> putMethodName(@PathVariable("id") Long userId, @RequestBody UserDto user) {
+    public ResponseEntity<UserDto> putMethodName(@PathVariable("id") Long userId, @RequestBody @Valid UserDto user) {
         user.setId(userId);
         UserDto updatedUser = userService.updateUser(user);
         return ResponseEntity.ok(updatedUser);
